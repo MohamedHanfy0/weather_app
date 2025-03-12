@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:joooooooooooooooo/models/weather_model.dart';
 import 'package:joooooooooooooooo/pages/home_page.dart';
+import 'package:joooooooooooooooo/providers/weahter_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(WeatherApp());
 }
 
 class WeatherApp extends StatelessWidget {
-  const WeatherApp({super.key});
+  WeatherApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, home: HomePage(),);
+    return ChangeNotifierProvider(
+      create: (context) => WeahterProvider(),
+      child: MaterialApp(
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          // primarySwatch: Colors.deepPurple,
+          primaryColor: Colors.amber,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+      ),
+    );
   }
 }
