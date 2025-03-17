@@ -1,36 +1,24 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:joooooooooooooooo/models/weather_model.dart';
-import 'package:joooooooooooooooo/providers/weahter_provider.dart';
-import 'package:joooooooooooooooo/sevice/weather_service.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:joooooooooooooooo/cubits/cubit/weather_cubit.dart';
 
 class SeachPage extends StatelessWidget {
-  String? cityName;
+   SeachPage({super.key});
 
   void getData(context) async {
-    WeatherModel? weather = await WeatherService().getWeather(
-      cityName: cityName!,
-    );
-    // ignore: use_build_context_synchronously
-    Provider.of<WeahterProvider>(context, listen: false).weatherModelData =
-        weather;
-    
-    // ignore: use_build_context_synchronously
-    Provider.of<WeahterProvider>(context, listen: false).cityName = cityName;
-
-    // ignore: use_build_context_synchronously
+    BlocProvider.of<WeatherCubit>(context).getWeather(cityName: cityName!);
     Navigator.pop(context);
   }
+    String? cityName;
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
       appBar: AppBar(
         title: Text("Seach Weather"),
-        // backgroundColor: Colors.blue,
-        // foregroundColor: Colors.white,
+       
       ),
       body: Container(
         padding: EdgeInsets.all(16),
